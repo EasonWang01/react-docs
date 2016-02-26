@@ -24,7 +24,7 @@ next: addons.html
 ### 瀏覽器中的JSX轉換
 
 如果你喜歡使用JSX，官方建議使用browserify或webpack或是使用npm下載babel-core，最後在HTML中加入
-<script type="text/babel">來執行JSX的轉換。(先前的babel-browser已移除http://babeljs.io/docs/usage/browser/)
+`<script type="text/babel">`來執行JSX的轉換。(先前的babel-browser已移除http://babeljs.io/docs/usage/browser/)
 
 > 注意：
 >
