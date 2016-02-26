@@ -12,7 +12,7 @@ next: addons.html
 
 ### CDN托管的React
 
-我们在我们的[下载页面](/react/downloads.html)提供了React的CDN托管版本。这些预构建的文件使用UMD模块格式。直接简单地把它们放在`<script>`标签中将会给你环境的全局作用域引入一个`React`对象。React也可以在CommonJS和AMD环境下正常工作。
+我们在我们的[下载页面](https://facebook.github.io/react/downloads.html)提供了React的CDN托管版本。这些预构建的文件使用UMD模块格式。直接简单地把它们放在`<script>`标签中将会给你环境的全局作用域引入一个`React`对象。React也可以在CommonJS和AMD环境下正常工作。
 
 
 ### 使用主分支
@@ -21,19 +21,58 @@ next: addons.html
 
 ## JSX
 
-### 浏览器中的JSX转换
+### 瀏覽器中的JSX轉換
 
-如果你喜欢使用JSX，我们[在我们的下载页面](/react/downloads.html)提供了一个用于开发的浏览器中的JSX转换器。简单地用一个`<script type="text/jsx">`标签来触发JSX转换器。
+如果你喜歡使用JSX，官方建議使用browserify或webpack或是使用npm下載babel-core，最後在HTML中加入
+<script type="text/babel">來執行JSX的轉換。(先前的babel-browser已移除http://babeljs.io/docs/usage/browser/)
 
 > 注意：
 >
 > 浏览器中的JSX转换器是相当大的，并且会在客户端导致无谓的计算，这些计算是可以避免的。不要在生产环境使用 - 参考下一节。
 
 
-### 生产环境化：预编译JSX
+### 生產環境：預先編譯JSX
 
-如果你有[npm](http://npmjs.org/)，你可以简单地运行`npm install -g react-tools`来安装我们的命令行`jsx`工具。这个工具会把使用JSX语法的文件转换成纯的可以直接在浏览器里面运行起来的JavaScript文件。它也会为你监视目录，然后自动转换变化的文件；例如：`jsx --watch src/ build/`。运行`jsx --help`来查看更多关于如何使用这个工具的信息。
+如果你有[npm](http://npmjs.org/)，你可以直接運行`npm install -g babel-cli` Babel有內建支持React v0.12+，所有HTML元素會自動轉換成對應的`React.createElement(...)`，displayName會自動被加入，這個插件會自動主換所有JSX的文件為javascript的文件，使你可以直接在瀏覽器中使用，他也會自動去監視檔案的變動，並將它自動轉換。例如以下指令`babel --watch src/ --out-dir lib/`。
 
+從Babel6開始，預設配置將不再提供轉換的功能，你必須手動在執行command時指定，或是從`.babelrc`檔案去設定，除此之外還要從npm安裝一些babel的其他套件包含`es2015`和`react presets`，更多相關資訊可參考Babel 6發行時所寫的Blog。
+
+上述的安裝指令範例如下
+```
+npm install babel-preset-es2015 babel-preset-react
+
+babel --presets es2015,react --watch src/ --out-dir lib/
+```
+預設情況下，JSX的檔案的結尾含有.js將自動被轉換，你可以執行`babel --help`查看更多相關資訊。
+
+##範例:
+```
+$ cat test.jsx
+var HelloMessage = React.createClass({
+  render: function() {
+    return <div>Hello {this.props.name}</div>;
+  }
+});
+
+ReactDOM.render(<HelloMessage name="John" />, mountNode);
+$ babel test.jsx
+"use strict";
+
+var HelloMessage = React.createClass({
+  displayName: "HelloMessage",
+
+  render: function render() {
+    return React.createElement(
+      "div",
+      null,
+      "Hello ",
+      this.props.name
+    );
+  }
+});
+
+ReactDOM.render(React.createElement(HelloMessage, { name: "John" }), mountNode);
+```
 
 ### 有用的开源项目
 
