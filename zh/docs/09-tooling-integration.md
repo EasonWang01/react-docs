@@ -21,31 +21,31 @@ next: addons.html
 
 ## JSX
 
-### 瀏覽器中的JSX轉換
+### 浏览器中的JSX转换
 
-如果你喜歡使用JSX，官方建議使用browserify或webpack或是使用npm下載babel-core，最後在HTML中加入
-`<script type="text/babel">`來執行JSX的轉換。(先前的babel-browser已移除http://babeljs.io/docs/usage/browser/)
+如果你喜欢使用JSX，官方建议使用browserify或webpack或是使用npm下载babel-core，最後在HTML中加入
+`<script type="text/babel">`来执行JSX的转换。(先前的babel-browser已移除http://babeljs.io/docs/usage/browser/)
 
 > 注意：
 >
 > 浏览器中的JSX转换器是相当大的，并且会在客户端导致无谓的计算，这些计算是可以避免的。不要在生产环境使用 - 参考下一节。
 
 
-### 生產環境：預先編譯JSX
+### 生产环境：预先编译JSX
 
-如果你有[npm](http://npmjs.org/)，你可以直接運行`npm install -g babel-cli` Babel有內建支持React v0.12+，所有HTML元素會自動轉換成對應的`React.createElement(...)`，displayName會自動被加入，這個插件會自動主換所有JSX的文件為javascript的文件，使你可以直接在瀏覽器中使用，他也會自動去監視檔案的變動，並將它自動轉換。例如以下指令`babel --watch src/ --out-dir lib/`。
+如果你有[npm](http://npmjs.org/)，你可以直接运行`npm install -g babel-cli` Babel有内建支持React v0.12+，所有HTML元素会自动转换成对应的`React.createElement(...)`，displayName会自动被加入，这个插件会自动主换所有JSX的文件为javascript的文件，使你可以直接在浏览器中使用，他也会自动去监视档案的变动，并将它自动转换。例如以下指令`babel --watch src/ --out-dir lib/`。
 
-從Babel6開始，預設配置將不再提供轉換的功能，你必須手動在執行command時指定，或是從`.babelrc`檔案去設定，除此之外還要從npm安裝一些babel的其他套件包含`es2015`和`react presets`，更多相關資訊可參考Babel 6發行時所寫的Blog。
+从Babel6开始，预设配置将不再提供转换的功能，你必须手动在执行command时指定，或是从`.babelrc`档案去设定，除此之外还要从npm安装一些babel的其他套件包含`es2015`和`react presets`，更多相关资讯可参考Babel 6发行时所写的Blog。
 
-上述的安裝指令範例如下
+上述的安装指令范例如下
 ```
 npm install babel-preset-es2015 babel-preset-react
 
 babel --presets es2015,react --watch src/ --out-dir lib/
 ```
-預設情況下，JSX的檔案的結尾含有.js將自動被轉換，你可以執行`babel --help`查看更多相關資訊。
+预设情况下，JSX的档案的结尾含有.js将自动被转换，你可以执行`babel --help`查看更多相关资讯。
 
-##範例:
+##范例:
 ```
 $ cat test.jsx
 var HelloMessage = React.createClass({
