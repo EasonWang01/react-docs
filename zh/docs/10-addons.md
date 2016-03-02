@@ -20,6 +20,6 @@ next: animation.html
 - [`TestUtils`](test-utils.html)， 简单的辅助工具，用于编写测试用例（仅存在于未压缩版）.
 - [`Perf`](perf.html)，用于性能测评，并帮助你检查出可优化的功能点。
 
-以前的 `react-with-addons.js`已經不適用。
+以前的 `react-with-addons.js`已经不适用。
 
-現在只能從npm上去安裝，`npm install react-addons-pure-render-mixin`
+现在只能从npm上去安装，`npm install react-addons-pure-render-mixin`
